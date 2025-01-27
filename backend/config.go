@@ -3,14 +3,12 @@ package main
 import (
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
 
 	"github.com/joho/godotenv"
 )
 
 type Config struct {
-	Port       int
 	DBHost     string
 	DBPort     string
 	DBUser     string
@@ -21,7 +19,6 @@ type Config struct {
 }
 
 var defaultConfig = Config{
-	Port:       8080,
 	DBHost:     "localhost",
 	DBPort:     "3306",
 	DBUser:     "surgemdls",
@@ -47,9 +44,6 @@ func loadConfig() *Config {
 
 	// 根据环境加载配置
 	prefix := env + "_"
-	if port := os.Getenv(prefix + "PORT"); port != "" {
-		config.Port,_ = strconv.Atoi(port)
-	}
 	if dbHost := os.Getenv(prefix + "DB_HOST"); dbHost != "" {
 		config.DBHost = dbHost
 	}
@@ -67,6 +61,9 @@ func loadConfig() *Config {
 	}
 	if authToken := os.Getenv(prefix + "AUTH_TOKEN"); authToken != "" {
 		config.AuthToken = authToken
+	}
+	if serverPort := os.Getenv(prefix + "SERVER_PORT"); serverPort != "" {
+		config.ServerPort = serverPort
 	}
 
 	return &config
