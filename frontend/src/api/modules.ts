@@ -61,5 +61,5 @@ export const deleteModule = async (id: number): Promise<void> => {
 export const getSubscribeUrl = (id: number): string => {
   // 获取当前域名
   const host = window.location.origin;
-  return `${host}/api/modules/${id}/subscribe`;
+  return `${host}/subscribe/modules/${id}`;
 };

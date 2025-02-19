@@ -39,11 +39,20 @@ export const Layout = ({ children }: LayoutProps) => {
         }}
       >
         <div style={{ padding: '16px', textAlign: 'center' }}>
-          <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold', color: '#1890ff' }}>Surge</h1>
+          <h1 
+            style={{ 
+              margin: 0, 
+              fontSize: '18px', 
+              fontWeight: 'bold', 
+              color: '#1890ff',
+              cursor: 'pointer'
+            }}
+            onClick={() => navigate('/modules')}
+          >Surge</h1>
         </div>
         <Menu
           mode="inline"
-          selectedKeys={[location.pathname.split('/')[1] || 'files']}
+          selectedKeys={[location.pathname.startsWith('/modules') ? 'files' : (location.pathname.split('/')[1] || 'files')]}
           items={menuItems}
           style={{ border: 'none' }}
         />
@@ -64,7 +73,11 @@ export const Layout = ({ children }: LayoutProps) => {
             <Button type="primary" onClick={() => navigate('/modules/create')}>
               添加新模块
             </Button>
-            <Avatar icon={<UserOutlined />} />
+            <Avatar 
+              icon={<UserOutlined />} 
+              style={{ cursor: 'pointer' }}
+              onClick={() => navigate('/info')}
+            />
           </div>
         </Header>
         <Content

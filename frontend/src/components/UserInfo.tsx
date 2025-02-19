@@ -7,7 +7,6 @@ export const UserInfo = () => {
   
   // 获取实际的环境变量信息
   const envInfo = {
-    '运行环境': localStorage.getItem('env_mode') || 'development',
     'API Token': localStorage.getItem('auth_token') || '未读取成功',
     'API 地址': localStorage.getItem('api_base_url') || window.location.origin,
   };
