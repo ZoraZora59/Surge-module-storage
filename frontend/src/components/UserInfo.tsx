@@ -4,12 +4,6 @@ import { UserOutlined, SettingOutlined, KeyOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
 export const UserInfo = () => {
-  // 这里可以通过API获取实际的用户信息
-  const userInfo = {
-    username: '当前用户',
-    role: '管理员',
-    lastLogin: new Date().toLocaleString('zh-CN')
-  };
   
   // 获取实际的环境变量信息
   const envInfo = {
