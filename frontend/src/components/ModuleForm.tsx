@@ -16,8 +16,14 @@ export const ModuleForm = () => {
     queryFn: () => getModule(Number(id)),
     enabled: !!id,
     onSuccess(data) {
-      form.setFieldsValue(data);
+      if (data) {
+        form.setFieldsValue(data);
+      }
     },
+    staleTime: 0,
+    cacheTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true
   });
 
   const createMutation = useMutation({
@@ -86,23 +92,24 @@ export const ModuleForm = () => {
         }
       }}>{id ? '编辑模块' : '创建模块'}</h2>
       <Spin spinning={isLoadingModule}>
-        <Form
-          form={form}
-          layout="vertical"
-          onFinish={onFinish}
-          initialValues={module}
-          style={{
-            width: '100%',
-            '@media (max-width: 768px)': {
-              '.ant-form-item': {
-                marginBottom: '16px',
-              },
-              '.ant-form-item-label': {
-                padding: '0 0 4px',
+        {(id ? !!module : true) && (
+          <Form
+            form={form}
+            layout="vertical"
+            onFinish={onFinish}
+            initialValues={module}
+            style={{
+              width: '100%',
+              '@media (max-width: 768px)': {
+                '.ant-form-item': {
+                  marginBottom: '16px',
+                },
+                '.ant-form-item-label': {
+                  padding: '0 0 4px',
+                }
               }
-            }
-          }}
-        >
+            }}
+          >
         <Form.Item
           name="name"
           label="模块名称"
@@ -164,6 +171,7 @@ export const ModuleForm = () => {
           </div>
         </Form.Item>
       </Form>
+        )}
       </Spin>
     </div>
   );

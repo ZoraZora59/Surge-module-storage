@@ -12,8 +12,17 @@ export const ModuleDetail = () => {
 
   const { data: module, isLoading, error } = useQuery({
     queryKey: ['module', id],
-    queryFn: () => getModule(Number(id)),
+    queryFn: () => {
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('请求超时')), 5000);
+      });
+      return Promise.race([getModule(Number(id)), timeoutPromise]);
+    },
     enabled: !!id,
+    staleTime: 0,
+    cacheTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true
   });
 
   if (error) {

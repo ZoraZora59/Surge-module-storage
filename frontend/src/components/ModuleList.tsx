@@ -17,7 +17,11 @@ export const ModuleList = () => {
 
   const { data: modules = [], isLoading, error, refetch } = useQuery({
     queryKey: ['modules'],
-    queryFn: getModules
+    queryFn: getModules,
+    staleTime: 0,
+    cacheTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true
   });
 
   const handleDelete = async (id: number) => {
